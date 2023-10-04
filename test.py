@@ -73,7 +73,7 @@ class SeleniumTestSummary:
         try:
             output_text = self.driver.find_element(by=By.ID, value=otuput_tag).get_property('value')
             if output_text == '':
-                print('xxxxxxxxxxxxxxxxx ❌Test Failed : (Recieved no response from backend) xxxxxxxxxxxxxxxxxxxxxxxx')
+                print('xxxxxxxxxxxxxxxxx ❌Test Failed : (Recieved no response from backend) xxxxxxxxxxxxxxxxx')
             else:
                 print('Test passed  ')
         except:
