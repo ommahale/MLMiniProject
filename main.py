@@ -23,11 +23,16 @@ app.add_middleware(
 )
 
 class Req(BaseModel):
-    min_length : Optional[int]=5
-    max_length : Optional[int]=62
+    percentage : Optional[float]=50
     text: str
 
 @app.post('/summarize/')
 def getSummary(body:Req):
-    summ = pipeline('summarization', model=model, tokenizer=tokenizer, device=0, min_length=body.min_length, max_length = body.max_length)
+    arr = body.text.split(' ')
+    word_count = len(arr)
+    ratio = body.percentage/100
+    min_length = int(word_count*ratio)
+    max_length = int(word_count*ratio*2)
+    print(min_length, max_length)
+    summ = pipeline('summarization', model=model, tokenizer=tokenizer, min_length=min_length, max_length = max_length)
     return summ(body.text)
